@@ -1,0 +1,158 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #232f3e;
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.logo img {
+    height: 40px;
+    color: white;
+}
+
+.searchBar {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+    margin-right: 10px;
+
+}
+
+.searchBar input {
+    width: 100%;
+    padding: 10px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border: none;
+}
+
+.searchBar button {
+    padding: 10px;
+    background-color: #febd69;
+    border: none;
+    cursor: pointer;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.searchBar button:hover{
+    border: 1px solid white;
+}
+
+.addressChange p {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    cursor: pointer;
+}
+.addressChange .first{
+    font-size: 0.8rem;
+}
+
+.navLinks {
+    display: flex;
+    gap: 20px;
+}
+
+.navLinks a {
+    color: white;
+    text-decoration: none;
+}
+
+.mainNav {
+    background-color: #37475a;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    gap: 20px;
+}
+
+.mainNav a {
+    color: white;
+    text-decoration: none;
+}
+
+.heroSection img {
+    width: 100%;
+    height: auto;
+}
+ 
+.heroSection ul{
+    padding: 0;
+    margin: 0;
+}
+.heroSection button{
+    z-index: 2;
+    position: absolute;
+    justify-content: space-between;
+    top: 20%;
+    padding: 5vh 1vw;
+    background-color: #ffffff4f;
+    border: none;
+    outline: none;
+    font-size: 20px;
+}
+.heroSection .handleNext{
+    right: 0;
+}
+
+.productSection {
+    padding: 20px;
+    border: 1px solid black;
+    margin-top: -310px;
+    z-index: 1;
+}
+
+.productSection h2 {
+    margin-top: 0;
+}
+
+.products {
+    
+    display: flex;
+    gap: 20px;
+   
+}
+.prodImg{
+    margin-bottom: 20px;
+}
+
+.prodImg img{
+    
+    height: 110%;
+    border-radius: 6px;
+ 
+}
+
+.product {
+    text-align: center;
+    width: 25%;
+    padding: 12px;
+    height: 20vw;
+    
+    background-color: white;
+}
+
+footer {
+    background-color: #232f3e;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
+.navLinkHover {
+    border: 1px solid transparent;
+    padding: 2px;
+    border-radius: 4px;
+}
+.navLinkHover:hover {
+    border: 1px solid white;
+    padding: 2px;
+    border-radius: 4px;
+}
