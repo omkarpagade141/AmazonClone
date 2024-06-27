@@ -41,6 +41,7 @@ function RegistersignupAdmin() {
       const response = await axios.post('http://localhost:4000/register', formData);
       if (response.status === 200) {
         alert('Registration Successful...')
+        
 
       } else {
         alert('Registration failed')
@@ -70,6 +71,7 @@ function RegistersignupAdmin() {
     try {
       const response = await axios.post('http://localhost:4000/loginadmin', formDataLogin);
       alert('login success')
+      window.location.href= '/admin/dashboard';
       setUser(response.data.user); // Update user state in parent component
     } catch (err) {
       setError(err.response.data.message || 'Invalid email or password');

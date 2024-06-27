@@ -1,0 +1,26 @@
+/* .App {
+    display: flex;
+    flex-direction: column;
+  } */
+.adminNav{
+     background-color: rgb(224, 205, 209);
+     height: 44px;
+
+}
+.toggle-button {
+     position: absolute;
+     left: 0;
+    padding: 10px 20px;
+    cursor: pointer;
+    width: 200px;
+    z-index: 1001;
+     
+}
+
+.content {
+    margin: 20px;
+    padding: 20px;
+    position: relative;
+    z-index: 500;
+    /* Below the toggle button and sidebar */
+}
