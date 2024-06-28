@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Sidebar from './Sidebar';
 import './Dashboard.css';
 import SearchProduct from './SearchProduct';
+import AddProduct from './AddProduct';
 
 const AdminDashboard = () => {
 
@@ -10,6 +11,19 @@ const AdminDashboard = () => {
     const toggleSidebar = () => {
         setIsSidebarOpen(!isSidebarOpen);
     };
+
+    const [activeComponent, setActiveComponent] = useState('Component1');
+
+  const renderComponent = () => {
+    switch (activeComponent) {
+      case 'Component1':
+        return <SearchProduct/>;
+      case 'Component2':
+        return <AddProduct />;
+      default:
+        return <SearchProduct />;
+    }
+  };
 
 
 
@@ -24,10 +38,11 @@ const AdminDashboard = () => {
                     {isSidebarOpen ? 'Hide Sidebar' : 'Show Sidebar'}
                 </button>
             </div>
-            <SearchProduct/>
+            {renderComponent()}
+            
 
 
-            <Sidebar isOpen={isSidebarOpen} />
+            <Sidebar isOpen={isSidebarOpen} setActiveComponent={setActiveComponent} />
              
            
         </>
