@@ -7,8 +7,10 @@ import multer from 'multer'
 import  {v2 as cloudinary}  from 'cloudinary'
 
 import productRoutes from './routes/product.route.js'
+import searchRpute from './routes/adminSearchFeature.route.js' 
 import userRoute from './routes/register.route.js'
 import loginRoute from './routes/loginAdmin.route.js'
+import productAllRoute from './routes/AllProductFetch.route.js'
  
 dotenv.config();
 const app=express();    
@@ -38,8 +40,11 @@ cloudinary.config({
  
   
 app.use('/register', userRoute);  
-app.use('/loginadmin', loginRoute);
-app.use('/admincrud/products', productRoutes(upload));
+app.use('/loginadmin', loginRoute); 
+app.use('/admincrud', productRoutes(upload));
+app.use('/admincrud/search', searchRpute); 
+app.use('/products',productAllRoute);
+ 
  
  
  

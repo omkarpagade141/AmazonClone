@@ -3,23 +3,29 @@ import Sidebar from './Sidebar';
 import './Dashboard.css';
 import SearchProduct from './SearchProduct';
 import AddProduct from './AddProduct';
+import UpdateProduct from './UpdateProduct'
+import DeleteProduct from './DeleteProduct';
 
 const AdminDashboard = () => {
 
-    const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
-    const toggleSidebar = () => {
-        setIsSidebarOpen(!isSidebarOpen);
-    };
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
 
-    const [activeComponent, setActiveComponent] = useState('Component1');
+  const [activeComponent, setActiveComponent] = useState('Component2');
 
   const renderComponent = () => {
     switch (activeComponent) {
       case 'Component1':
-        return <SearchProduct/>;
+        return <SearchProduct />;
       case 'Component2':
         return <AddProduct />;
+      case 'Component3':
+        return <UpdateProduct />;
+      case 'Component4':
+        return <DeleteProduct />;
       default:
         return <SearchProduct />;
     }
@@ -27,26 +33,26 @@ const AdminDashboard = () => {
 
 
 
-   
-
-    return (
-        <>
-
-        
-            <div className="adminNav">
-                <button className="toggle-button" onClick={toggleSidebar}>
-                    {isSidebarOpen ? 'Hide Sidebar' : 'Show Sidebar'}
-                </button>
-            </div>
-            {renderComponent()}
-            
 
 
-            <Sidebar isOpen={isSidebarOpen} setActiveComponent={setActiveComponent} />
-             
-           
-        </>
-    );
+  return (
+    <>
+
+
+      <div className="adminNav">
+        <button className="toggle-button" onClick={toggleSidebar}>
+          {isSidebarOpen ? 'Hide Sidebar' : 'Show Sidebar'}
+        </button>
+      </div>
+      {renderComponent()}
+
+
+
+      <Sidebar isOpen={isSidebarOpen} setActiveComponent={setActiveComponent} />
+
+
+    </>
+  );
 };
 
 export default AdminDashboard;
