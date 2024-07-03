@@ -4,7 +4,7 @@ import { CloudinaryStorage } from 'multer-storage-cloudinary'
 
 
 
-export const createProduct = async (req, res) => {
+const createProduct = async (req, res) => {
 
 
     try {
@@ -15,11 +15,11 @@ export const createProduct = async (req, res) => {
             else {
                 console.log(result)
             }
-            console.log(result);
+
 
             const { name, description, price, category } = req.body;
             const image = `${result['secure_url']}`
-             
+
 
 
 
@@ -37,57 +37,38 @@ export const createProduct = async (req, res) => {
     }
 };
 
-export const getProducts = async (req, res) => {
+const searchProduct = async (req, res) => {
+    const searchTerm = req.params.searchTerm;
+
     try {
-        const products = await Product.find();
-        res.status(200).json(products);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
+      if (!searchTerm) {
+        return res.status(400).json({ error: 'Search term is required' });
+      }
+  
+      
+      const regex = new RegExp(searchTerm, 'i');  
+      const products = await Product.find({ name: regex });
+  
+      res.json(products);
+    } catch (err) {
+      console.error('Error searching products:', err);
+      res.status(500).json({ error: 'Internal server error' });
     }
 };
 
-export const getProductById = async (req, res) => {
-    try {
-        const product = await Product.findById(req.params.id);
-        if (!product) {
-            return res.status(404).json({ error: 'Product not found' });
-        }
-        res.status(200).json(product);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-};
 
-export const updateProduct = async (req, res) => {
-    try {
+ export {
+    createProduct,
+    searchProduct
+}
 
-        const { name, description, price, category } = req.body;
-        const imageUrl = req.file ? req.file.path : undefined;
 
-        const updatedProduct = await Product.findByIdAndUpdate(
-            req.params.id,
-            { name, description, price, category, ...(imageUrl && { imageUrl }) },
-            { new: true }
-        );
 
-        if (!updatedProduct) {
-            return res.status(404).json({ error: 'Product not found' });
-        }
 
-        res.status(200).json(updatedProduct);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-};
 
-export const deleteProduct = async (req, res) => {
-    try {
-        const product = await Product.findByIdAndDelete(req.params.id);
-        if (!product) {
-            return res.status(404).json({ error: 'Product not found' });
-        }
-        res.status(200).json({ message: 'Product deleted successfully' });
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-};
+
+
+
+
+
+

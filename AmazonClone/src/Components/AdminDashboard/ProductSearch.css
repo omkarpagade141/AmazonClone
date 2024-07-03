@@ -1,0 +1,32 @@
+/* ProductSearch.css */
+
+.product-search {
+   
+  font-family: Arial, sans-serif;
+  margin-top: 50px;
+}
+
+.product-search input[type="text"] {
+  width: 50%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.product-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.product-list li {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
+
+.product-list li:hover {
+  background-color: #f1f1f1;
+}

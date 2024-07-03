@@ -28,7 +28,7 @@ function RegistersignupAdmin() {
     name: '',
     email: '',
     password: '',
-    role: 'admin',
+    role: 'user',
   });
 
   const { name, email, password, role } = formData;
@@ -56,7 +56,7 @@ function RegistersignupAdmin() {
   const [formDataLogin, setFormDataLogin] = useState({
     emailLogin: '',
     passwordLogin: '',
-    roleLogin: 'admin',
+    roleLogin: 'user',
   });
 
   const { emailLogin, passwordLogin, roleLogin } = formDataLogin;

@@ -29,11 +29,17 @@ const AddProduct = () => {
     formData.append('image', product.image); 
 
     try {
-      const response = await axios.post('http://localhost:4000/admincrud/products/addproduct', formData, {
+      const response = await axios.post('http://localhost:4000/admincrud/addproduct', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
+      if (response.status==201) {
+        alert('Product saved Success...')
+      }
+      else{
+        alert('Product not saved')
+      }
       console.log(response.data);
     } catch (error) {
       console.error(error);
@@ -86,8 +92,7 @@ const AddProduct = () => {
         <option value="">Select Category</option>
         <option value="electronics">Electronics</option>
         <option value="HomeAppliances">Home Appliances</option>
-        <option value="fashion">Fashion</option>
-        <option value="home">Home</option>
+        <option value="fashion">Fashion</option> 
         <option value="books">Books</option>
       </select>
     </div>

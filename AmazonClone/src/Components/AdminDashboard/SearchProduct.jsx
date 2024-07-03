@@ -1,54 +1,57 @@
-import React, { useState } from 'react'
-
-function SearchProduct() {
-
-
-    const [category, setCategory] = useState('');
-
-    const handleCategoryChange = (e) => {
-        setCategory(e.target.value);
-    };
-
-    const handleSearch = () => {
-        // Implement the search functionality based on the selected category
-        console.log(`Searching products in category: ${category}`);
-    };
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import './ProductSearch.css'
 
 
+const ProductSearch = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [products, setProducts] = useState([]);
 
+  useEffect(() => {
+    if (searchTerm.trim() !== '') {
+      fetchProducts(searchTerm);
+    } else {
+      setProducts([]);
+    }
+  }, [searchTerm]);
 
+  const fetchProducts = async (query) => {
+    try {
+      const response = await axios.get(`http://localhost:4000/admincrud/search/${encodeURIComponent(query)}`);
+      setProducts(response.data);
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    }
+  };
+
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value);
+  };
 
   return (
-    <div className="container mx-auto mt-10">
-    <div className="max-w-md mx-auto bg-white shadow-md rounded-lg p-6">
-        
-        <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="categorySelect">
-                Select Product Category
-            </label>
-            <select
-                id="categorySelect"
-                className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                value={category}
-                onChange={handleCategoryChange}
-            >
-                <option value="">Select Category</option>
-                <option value="electronics">Electronics</option>
-                <option value="HomeAppliances">Home Appliances</option>
-                <option value="fashion">Fashion</option>
-                <option value="home">Home</option>
-                <option value="books">Books</option>
-            </select>
-        </div>
-        <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            onClick={handleSearch}
-        >
-            Search
-        </button>
+    <div className="product-search">
+      <input
+        type="text"
+        placeholder="Search products..."
+        value={searchTerm}
+        onChange={handleSearch}
+      />
+      <div className="products-container">
+      
+      <div className="products-list">
+        {products.map((product) => (
+          <div key={product._id} className="product-card">
+            <img src={product.image} alt={product.name} className="product-image" />
+            <h2 className="product-name">{product.name}</h2>
+            <p className="product-description">{product.description}</p>
+            <p className="product-price">${product.price}</p>
+            <p className="product-category">{product.category}</p>
+          </div>
+        ))}
+      </div>
     </div>
-</div>
-  )
-}
+    </div>
+  );
+};
 
-export default SearchProduct
+export default ProductSearch;

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import './Homepage.css'
 import heroImages from '.'
 import productImages from './index2'
+import AllProducts from './AllProducts';
+
 
 
 
@@ -135,6 +137,7 @@ function Home() {
                 </div>
 
             </main>
+            <AllProducts/>
             
         </>
     )

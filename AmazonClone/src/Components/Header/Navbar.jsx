@@ -3,11 +3,12 @@ import './Navbar.css'
 import AmazonLogo from './amazon_logo.png'
 import { NavLink } from 'react-router-dom'
 import Home from '../HomePage/Home'
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 
 
 function Navbar() {
     return (
-        <div>
+        <div className='navDiv'>
             <header>
                 <div className="logo">
                    <NavLink to='/home'><img src={AmazonLogo} alt="Amazon Logo" /></NavLink> 
@@ -31,6 +32,7 @@ function Navbar() {
                         <NavLink to="#">Returns & Orders</NavLink>
                     </div>
                     <div className="navLinkHover">
+                        <ShoppingCartIcon/>
                         <NavLink to="#">Cart</NavLink>
                     </div>
 
