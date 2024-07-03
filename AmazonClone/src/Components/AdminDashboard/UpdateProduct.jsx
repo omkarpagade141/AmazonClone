@@ -35,7 +35,14 @@ function UpdateProduct() {
 
   const handleUpdateProduct = async (updatedProduct) => {
     try {
-      await axios.put(`/api/products/${updatedProduct._id}`, updatedProduct);
+      const response=await axios.put(`http://localhost:4000/admincrud/updateproduct/${updatedProduct._id}`, updatedProduct);
+      if (response.status==201) {
+        alert("Product Updated Successfully");
+      }
+      else{
+        alert("Product Not Updated");
+      }
+      
       fetchProducts();
       setEditingProduct(null);
     } catch (error) {
