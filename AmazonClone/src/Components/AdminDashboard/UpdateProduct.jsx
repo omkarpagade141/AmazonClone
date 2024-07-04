@@ -1,24 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './UpdateProduct.css';
+import Loader from '../Loader/loader';
  
 
 function UpdateProduct() {
   const [products, setProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [editingProduct, setEditingProduct] = useState(null);
+  const [loaderStatus, setLoaderStatus]=useState(false)
 
   useEffect(() => {
     fetchProducts();
   }, []);
 
   const fetchProducts = async () => {
+    setLoaderStatus(true)
     try {
       const response = await axios.get('http://localhost:4000/products');
       setProducts(response.data);
     } catch (error) {
       console.error('Error fetching products:', error);
     }
+    setLoaderStatus(false)
   };
 
   const handleSearch = (e) => {
@@ -34,6 +38,8 @@ function UpdateProduct() {
   };
 
   const handleUpdateProduct = async (updatedProduct) => {
+    setLoaderStatus(true)
+
     try {
       const response=await axios.put(`http://localhost:4000/admincrud/updateproduct/${updatedProduct._id}`, updatedProduct);
       if (response.status==201) {
@@ -48,6 +54,7 @@ function UpdateProduct() {
     } catch (error) {
       console.error('Error updating product:', error);
     }
+    setLoaderStatus(false)
   };
 
   return (
@@ -76,6 +83,7 @@ function UpdateProduct() {
           onUpdateProduct={handleUpdateProduct}
         />
       )}
+      {loaderStatus && <Loader/>}
     </div>
   );
 };
@@ -131,6 +139,7 @@ const ProductEditForm = ({ product, onUpdateProduct }) => {
         />
         <button type="submit">Update Product</button>
       </form>
+      
     </div>
   );
 }

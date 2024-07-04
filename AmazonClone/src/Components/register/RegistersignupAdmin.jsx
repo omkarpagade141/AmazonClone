@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import './Registersignup.css'
 import axios from 'axios'
+import Loader from '../Loader/loader'
 
 
 function RegistersignupAdmin() {
   const [activehtmlForm, setActivehtmlForm] = useState("form active")
   const [inactivehtmlForm, setInactivehtmlForm] = useState(" form")
   const [titlehtmlForm, setTitlehtmlForm] = useState('Login')
+  const [loaderStatus, setLoaderStatus]=useState(false)
   
   const [error, setError] = useState('');
 
@@ -37,6 +39,7 @@ function RegistersignupAdmin() {
 
   const onSubmit = async e => {
     e.preventDefault();
+    setLoaderStatus(true)
     try {
       const response = await axios.post('http://localhost:4000/register', formData);
       if (response.status === 200) {
@@ -51,6 +54,7 @@ function RegistersignupAdmin() {
       console.log("Error occurred:", err);
       alert('Registration failed !!')
     }
+    setLoaderStatus(false)
   };
 
 
@@ -68,6 +72,7 @@ function RegistersignupAdmin() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setLoaderStatus(true)
     try {
       const response = await axios.post('http://localhost:4000/loginadmin', formDataLogin);
       alert('login success')
@@ -76,6 +81,7 @@ function RegistersignupAdmin() {
     } catch (err) {
       setError(err.response.data.message || 'Invalid email or password');
     }
+    setLoaderStatus(false)
   };
   const handleLogout = async () => {
     await axios.post('/api/logout'); // Backend endpoint to clear session
@@ -117,6 +123,7 @@ function RegistersignupAdmin() {
           <p className="form-switch">Already have an account? <span onClick={() => { changeActivehtmlFormm() }}>Login</span></p>
         </form>
       </div>
+      {loaderStatus && <Loader/>}
     </div>
   )
 }
