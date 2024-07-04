@@ -3,12 +3,14 @@ import './Homepage.css'
 import heroImages from '.'
 import productImages from './index2'
 import AllProducts from './AllProducts';
+import Loader from '../Loader/loader';
 
 
 
 
 function Home() {
     let [sliderImg, setSliderImg] = useState(0);
+    
 
 
     function handlePrev() {
@@ -40,6 +42,7 @@ function Home() {
     return (
         <>
             <main>
+              
                 <div className="heroSection">
                     <button className="handlePrev" onClick={() => { handlePrev() }}>&#60;</button>
                     <button className="handleNext" onClick={() => { handleNext() }}>&#62;</button>

@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './AllProducts.css';
+import Loader from '../Loader/loader';
 
 function AllProducts() {
     const [products, setProducts] = useState([]);
+    const [loaderStatus, setLoaderStatus]=useState(true)
 
     useEffect(() => {
       const fetchProducts = async () => {
+        setLoaderStatus(true)
         try {
           const response = await axios.get('http://localhost:4000/products');
           setProducts(response.data);
+          setLoaderStatus(false)
         } catch (error) {
           console.error('Error fetching products:', error);
         }
@@ -20,6 +24,7 @@ function AllProducts() {
   
     return (
       <div className="products-container">
+        {loaderStatus && <Loader/>}
       
       <div className="products-list">
         {products.map((product) => (

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import Loader from '../Loader/loader'
 
 const AddProduct = () => {
   const [product, setProduct] = useState({
@@ -9,6 +10,7 @@ const AddProduct = () => {
     category: '',
     image: null,
   });
+  const [loaderStatus, setLoaderStatus]=useState(false)
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -21,6 +23,7 @@ const AddProduct = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoaderStatus(true)
     const formData = new FormData();
     formData.append('name', product.name);
     formData.append('description', product.description);
@@ -35,6 +38,7 @@ const AddProduct = () => {
         },
       });
       if (response.status==201) {
+        setLoaderStatus(false)
         alert('Product saved Success...')
       }
       else{
@@ -47,8 +51,10 @@ const AddProduct = () => {
   };
 
   return (
+    
     <form onSubmit={handleSubmit} className="max-w-lg mx-auto p-8 bg-white shadow-md rounded-lg">
     <div className="mb-4">
+      {loaderStatus && <Loader/>}
       <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">Name</label>
       <input 
         type="text" 

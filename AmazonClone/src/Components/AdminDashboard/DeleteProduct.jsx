@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './DeleteProduct.css';
+import Loader from '../Loader/loader';
 
 function DeleteProduct() {
   
     const [products, setProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [editingProduct, setEditingProduct] = useState(null);
+  const [loaderStatus, setLoaderStatus]=useState(false)
 
   useEffect(() => {
     fetchProducts();
   }, []);
 
   const fetchProducts = async () => {
+    setLoaderStatus(true)
     try {
       const response = await axios.get('http://localhost:4000/products');
       if (Array.isArray(response.data)) {
@@ -23,6 +26,7 @@ function DeleteProduct() {
     } catch (error) {
       console.error('Error fetching products:', error);
     }
+    setLoaderStatus(false)
   };
 
   const handleSearch = (e) => {
@@ -38,6 +42,7 @@ function DeleteProduct() {
   };
 
   const handleDeleteClick = async (productId) => {
+    setLoaderStatus(true)
     try {
        const response=await axios.delete(`http://localhost:4000/admincrud/deleteproduct/${productId}`);
        console.log(response);
@@ -51,6 +56,7 @@ function DeleteProduct() {
     } catch (error) {
       console.error('Error deleting product:', error);
     }
+    setLoaderStatus(false)
   };
 
   return (
@@ -74,7 +80,7 @@ function DeleteProduct() {
           </div>
         ))}
       </div>
-      
+      {loaderStatus && <Loader/>}
     </div>
   );
   
