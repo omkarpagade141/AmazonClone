@@ -5,6 +5,7 @@ import SearchProduct from './SearchProduct';
 import AddProduct from './AddProduct';
 import UpdateProduct from './UpdateProduct'
 import DeleteProduct from './DeleteProduct';
+import AllOrders from './Orders';
 
 const AdminDashboard = () => {
 
@@ -26,6 +27,8 @@ const AdminDashboard = () => {
         return <UpdateProduct />;
       case 'Component4':
         return <DeleteProduct />;
+      case 'Component5':
+        return <AllOrders />;
       default:
         return <SearchProduct />;
     }

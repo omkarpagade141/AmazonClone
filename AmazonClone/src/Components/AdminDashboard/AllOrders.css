@@ -1,0 +1,10 @@
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 5px;
+  }
+  button{
+    background-color: rgb(197, 194, 194);
+    border-radius: 5px;
+    padding: 5px;
+  }

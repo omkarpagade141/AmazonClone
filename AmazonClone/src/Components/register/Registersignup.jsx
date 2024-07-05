@@ -1,14 +1,25 @@
 import React, { useState } from 'react'
 import './Registersignup.css'
 import axios from 'axios'
+import Loader from '../Loader/loader'
+import { useNavigate } from 'react-router-dom'
 
 
-function RegistersignupAdmin() {
+function RegistersignupAdmin({ onLogin }) {
   const [activehtmlForm, setActivehtmlForm] = useState("form active")
   const [inactivehtmlForm, setInactivehtmlForm] = useState(" form")
   const [titlehtmlForm, setTitlehtmlForm] = useState('Login')
+  const [loaderStatus, setLoaderStatus]=useState(false)
+  const [user,setUser]=useState(null)
+  const navigate = useNavigate ();
   
   const [error, setError] = useState('');
+
+  const [userDetails, setUserDetails] = useState({
+    name: '',
+    price: '',
+    email: ''
+  });
 
   function changeActivehtmlForm() {
     setActivehtmlForm("form")
@@ -37,6 +48,8 @@ function RegistersignupAdmin() {
 
   const onSubmit = async e => {
     e.preventDefault();
+    setLoaderStatus(true)
+    
     try {
       const response = await axios.post('http://localhost:4000/register', formData);
       if (response.status === 200) {
@@ -50,6 +63,8 @@ function RegistersignupAdmin() {
       console.log("Error occurred:", err);
       alert('Registration failed !!')
     }
+    setLoaderStatus(false)
+
   };
 
 
@@ -67,16 +82,27 @@ function RegistersignupAdmin() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setLoaderStatus(true)
     try {
-      const response = await axios.post('http://localhost:4000/loginadmin', formDataLogin);
+      const response = await axios.post('http://localhost:4000/login/user', formDataLogin);
+      setUser(response.data);
+      onLogin(response.data.user);
       alert('login success')
-      setUser(response.data.user); // Update user state in parent component
+       
+      
+      
+      
+
+      navigate('/home', { state:  response.data });
+      
     } catch (err) {
-      setError(err.response.data.message || 'Invalid email or password');
+      setError(  'Invalid email or password');
     }
+    setLoaderStatus(false)
+    
   };
   const handleLogout = async () => {
-    await axios.post('/api/logout'); // Backend endpoint to clear session
+    await axios.post('/api/logout');  
     setUser(null);
 };
 
@@ -90,7 +116,7 @@ function RegistersignupAdmin() {
           <h2 id="htmlFormTitle"> {titlehtmlForm}</h2>
         </div>
 
-
+        {loaderStatus && <Loader/>}
         <form id="loginhtmlForm " className={activehtmlForm} onSubmit={handleLogin}>
           <label htmlFor="loginEmail">Email</label>
           <input type="email" id="loginEmail" name='emailLogin' value={emailLogin} onChange={onChangeLogin} required />
@@ -99,6 +125,7 @@ function RegistersignupAdmin() {
             onChange={onChangeLogin} id="loginPassword" required />
           {error && <p style={{ color: 'red' }}>{error}</p>}
           <button type="submit" className='btnn'>Login</button>
+          {user && <div>Welcome, {user.name}</div>}
           <p className="form-switch">Don't have an account? <span onClick={() => { changeActivehtmlForm() }}>Register</span></p>
         </form>
 

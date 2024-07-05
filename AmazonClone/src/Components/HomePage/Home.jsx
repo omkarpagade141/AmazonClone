@@ -4,12 +4,21 @@ import heroImages from '.'
 import productImages from './index2'
 import AllProducts from './AllProducts';
 import Loader from '../Loader/loader';
+import { useLocation } from 'react-router-dom';
+import Cart from '../Cart/Cart';
 
 
 
 
-function Home() {
+function Home({ addToCart }) {
     let [sliderImg, setSliderImg] = useState(0);
+    const location = useLocation();
+    const user = location.state?.user;
+     
+
+     
+   
+    
     
 
 
@@ -44,6 +53,7 @@ function Home() {
             <main>
               
                 <div className="heroSection">
+                
                     <button className="handlePrev" onClick={() => { handlePrev() }}>&#60;</button>
                     <button className="handleNext" onClick={() => { handleNext() }}>&#62;</button>
 
@@ -140,7 +150,8 @@ function Home() {
                 </div>
 
             </main>
-            <AllProducts/>
+            <AllProducts addToCart={addToCart}/>
+            {/* <Cart/> */}
             
         </>
     )

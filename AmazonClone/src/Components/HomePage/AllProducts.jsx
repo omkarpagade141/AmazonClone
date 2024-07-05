@@ -3,17 +3,17 @@ import axios from 'axios';
 import './AllProducts.css';
 import Loader from '../Loader/loader';
 
-function AllProducts() {
+function AllProducts( { addToCart }) {
     const [products, setProducts] = useState([]);
-    const [loaderStatus, setLoaderStatus]=useState(true)
+    const [loaderStatus, setLoaderStatus]=useState(false)
 
     useEffect(() => {
       const fetchProducts = async () => {
-        setLoaderStatus(true)
+        
         try {
           const response = await axios.get('http://localhost:4000/products');
           setProducts(response.data);
-          setLoaderStatus(false)
+           
         } catch (error) {
           console.error('Error fetching products:', error);
         }
@@ -34,6 +34,7 @@ function AllProducts() {
             <p className="product-description">{product.description}</p>
             <p className="product-price">${product.price}</p>
             <p className="product-category">{product.category}</p>
+            <button onClick={() => addToCart(product)}>Add to Cart</button>
           </div>
         ))}
       </div>

@@ -10,6 +10,8 @@ import productRoutes from './routes/product.route.js'
 import userRoute from './routes/register.route.js'
 import loginRoute from './routes/loginAdmin.route.js'
 import productAllRoute from './routes/AllProductFetch.route.js'
+import orderRoute from './routes/userorder.route.js'
+import ordersAllRoute from './routes/AllOrders.route.js'
  
 dotenv.config();
 const app=express();    
@@ -34,16 +36,20 @@ cloudinary.config({
     
   });
   
-  const upload = multer({ storage: storage })
+  const upload = multer({ storage: storage }) 
    
  
   
 app.use('/register', userRoute);  
 app.use('/loginadmin', loginRoute); 
+app.use('/login', loginRoute); 
 app.use('/admincrud', productRoutes(upload));
  
- 
+
 app.use('/products',productAllRoute);
+app.use('/allorders',ordersAllRoute);
+
+app.use('/user',orderRoute);
  
  
  
