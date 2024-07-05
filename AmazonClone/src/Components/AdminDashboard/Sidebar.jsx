@@ -10,6 +10,7 @@ const Sidebar = ({ isOpen ,setActiveComponent }) => {
                 <button className="sidebar-button" onClick={() => setActiveComponent('Component2')}>Add Product</button>
                 <button className="sidebar-button" onClick={() => setActiveComponent('Component3')}>Update Product</button>
                 <button className="sidebar-button" onClick={() => setActiveComponent('Component4')}>Delete Product</button>
+                <button className="sidebar-button" onClick={() => setActiveComponent('Component5')}>Orders</button>
             </div>
         </div>
     );

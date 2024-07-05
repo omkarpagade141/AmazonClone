@@ -6,12 +6,12 @@ import Home from '../HomePage/Home'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 
 
-function Navbar() {
+function Navbar({ user, cart,toggleCart  }) {
     return (
         <div className='navDiv'>
             <header>
                 <div className="logo">
-                   <NavLink to='/home'><img src={AmazonLogo} alt="Amazon Logo" /></NavLink> 
+                    <NavLink to='/home'><img src={AmazonLogo} alt="Amazon Logo" /></NavLink>
                 </div>
                 <div className="deliverAddress navLinkHover">
                     <div className="addressChange">
@@ -26,14 +26,18 @@ function Navbar() {
                 </div>
                 <div className="navLinks ">
                     <div className="navLinkHover">
-                        <NavLink to="/signin">Hello, Sign in</NavLink>
+                        <NavLink to="/signin">{user ? <span>Welcome, {user.name}!</span> : <span>sign In</span>}</NavLink>
                     </div>
                     <div className="navLinkHover">
                         <NavLink to="#">Returns & Orders</NavLink>
                     </div>
-                    <div className="navLinkHover">
-                        <ShoppingCartIcon/>
-                        <NavLink to="#">Cart</NavLink>
+                    <div className="navLinkHover cartBtn">
+
+
+                        <button to="#" onClick={toggleCart}>
+                            <ShoppingCartIcon />
+                            <span>Cart: {cart.length} </span>
+                        </button>
                     </div>
 
 
