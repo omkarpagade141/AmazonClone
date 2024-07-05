@@ -22,7 +22,7 @@ function App() {
 
   const addToCart = (product) => {
     if (user) {
-      
+      product.quantity=1
       setCart((prevCart) => [...prevCart, product]);
     }
     else{
