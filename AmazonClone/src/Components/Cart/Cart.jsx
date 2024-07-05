@@ -16,11 +16,7 @@ const Cart = ({ cart,setCart ,removeFromCart, user }) => {
   const placeOrder = async () => {
     setLoaderStatus(true)
     try {
-      const senddata={
-        user:user._id,
-        cart:cart,
-        totalPrice:totalPrice
-      }
+     
       console.log(cart);
       const response = await axios.post('http://localhost:4000/user/orders', {
         "userId": `${user._id}`,
