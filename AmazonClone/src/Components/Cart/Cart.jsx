@@ -55,7 +55,7 @@ const increaseQuantity=(product)=>{
         "userId": `${user._id}`,
         "items": cart.map(product => ({
           "productId": `${product._id}`,
-          "quantity": 1
+          "quantity": `${product.quantity}`
         })),
         "totalPrice": totalPrice
       }

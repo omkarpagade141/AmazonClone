@@ -50,7 +50,7 @@ function App() {
           <Navbar user={user} cart={cart} toggleCart={toggleCart}/>
           <Routes>
             <Route path="/home" element={<Home onLogin={handleLogin} addToCart={addToCart}/>} />
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Home onLogin={handleLogin} addToCart={addToCart}/>} />
             <Route path="/signin" element={<Registersignup onLogin={handleLogin} />} />
             <Route path="/admin" element={<RegistersignupAdmin />} /> /admin/dashboard
             <Route path="/admin/dashboard" element={<AdminDashboard/>} />
