@@ -1,10 +1,24 @@
-table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-    padding: 5px;
-  }
-  button{
-    background-color: rgb(197, 194, 194);
+ 
+  select{
+    background-color: rgb(170, 129, 129);
     border-radius: 5px;
     padding: 5px;
+  }
+  .orderTable{
+    border: 1px solid black;
+    margin-left: 10px;
+  }
+  .orderTable td{
+    border: 1px solid black;
+   
+  }
+  .orderTable th{
+    border: 1px solid black;
+   
+  }
+  .noOrder{
+    margin-top: 100px;
+  }
+  .mainDiv{
+    margin-top: 30px;
   }
