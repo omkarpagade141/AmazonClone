@@ -26,7 +26,7 @@ function Navbar({ user, cart,toggleCart  }) {
                 </div>
                 <div className="navLinks ">
                     <div className="navLinkHover">
-                        <NavLink to="/signin">{user ? <span>Welcome, {user.name}!</span> : <span>sign In</span>}</NavLink>
+                        <NavLink to="/signin">{user ? <span>Welcome, {user.name}</span> : <span>sign In</span>}</NavLink>
                     </div>
                     <div className="navLinkHover">
                         <NavLink to="#">Returns & Orders</NavLink>
